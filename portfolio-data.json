@@ -1,0 +1,146 @@
+{
+  "$schema_note": "Machine-readable portfolio source data for Angajala Shashikumar. Generated 2026-11-09 from GitHub API (Shashi1912), the QA resume PDF published in the email-sender-app repo, and the local Automation_Engine project. LinkedIn public page is behind an authwall; resume carries the same profile data.",
+  "person": {
+    "full_name": "Angajala Shashikumar",
+    "title": "Software Test Engineer",
+    "summary": "Software Test Engineer with around 4 years of experience in automation and manual testing of desktop, VR, and web applications. Experienced in Hybrid frameworks using Java, Selenium WebDriver, TestNG, and Maven. Skilled in Page Object Model (POM) and Apache POI for external test data and configuration-based execution. Hands-on with defense and VR simulators built in C#, Unreal Engine (4.2, 5.1), and Reality Engine, emphasizing long-duration stability and immersive interactions. Experienced in InstallShield packaging and Agile delivery with cross-functional teams.",
+    "location": "Hyderabad, India",
+    "email": "angajalashashikumar@gmail.com",
+    "phone": "+91 88019 54605",
+    "links": {
+      "linkedin": "https://in.linkedin.com/in/shashikumar-angajala-19937a20a",
+      "github": "https://github.com/Shashi1912",
+      "github_note": "Resume prints github.com/shashikumar-angajala, but the live account is github.com/Shashi1912 — fix one of the two for consistency."
+    },
+    "hireable": true
+  },
+  "skills": {
+    "automation_tools": ["Selenium WebDriver", "Winnium", "TestNG", "Maven", "SVN"],
+    "programming": ["Java", "SQL", "Python", "JavaScript"],
+    "frameworks": ["Hybrid", "Data-Driven", "Keyword-Driven", "Page Object Model (POM)"],
+    "test_management": ["TFS", "JIRA"],
+    "testing_types": ["Regression", "Functional", "System", "Endurance", "Integration", "Smoke", "UAT"],
+    "other": ["InstallShield 2014/2024", "Batch Scripting", "Requirements Analysis", "Agile/Scrum", "Apache POI", "JavaMail API", "Windows UI Automation (UIA)", "OCR-based perception", "Local LLMs (Ollama)", "Prompt Engineering"]
+  },
+  "experience": [
+    {
+      "role": "Software Test Engineer",
+      "company": "Zen Technologies Ltd",
+      "location": "Hyderabad, India",
+      "start": "2021-11",
+      "end": null,
+      "current": true,
+      "highlights": [
+        "Executed functional, regression, smoke, sanity, system, and UAT test suites across desktop and VR defense simulator modules with full requirement traceability",
+        "Built Hybrid automation frameworks using Java, Selenium WebDriver, TestNG, and Maven with POM for readable page objects and maintainable locators",
+        "Implemented Apache POI for reading Excel/property files to enable configuration-based and reusable test execution",
+        "Developed and validated MSI installers using InstallShield and batch scripts; handled fresh installs, upgrades, and on-site troubleshooting",
+        "Collaborated with CSD, SMEs, Production ARTS, developers, and Scrum teams; logged reproducible defects in JIRA/TFS with evidence and environment notes",
+        "Conducted client demos and knowledge transfers, including VR walkthroughs, ensuring environment readiness"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Automation Engine — AI Desktop App Tester",
+      "type": "personal/flagship",
+      "stack": ["Python 3.13", "Windows UIA", "OCR", "Local LLMs via Ollama", "SQLite"],
+      "repo": null,
+      "status": "active development (FID-6 advanced tester in progress)",
+      "description": "An offline AI agent that tests any Windows desktop app the way a human would: give it an app and it perceives the UI (UIA tree + OCR), decides one action per turn via a code-first decision ladder (cache → rules → small LLM → large LLM), acts through raw SendInput, verifies every action against falsifiable post-conditions, and remembers via a state graph and learned recipes. Includes flow recording/replay, parameterized exercises with generated test cases, endurance metrics with leak detection, crash triage tooling (crashdoctor), incident evidence bundles, and self-contained HTML reports. Fully offline: loopback-only LLM, safety enforced in code (deny lists, destructive-action refusal, focus guard), never by prompt."
+    },
+    {
+      "name": "AIAgent — AI Testing Assistant",
+      "type": "personal",
+      "stack": ["Python"],
+      "repo": "https://github.com/Shashi1912/AIAgent",
+      "status": "public",
+      "description": "Desktop AI testing assistant: chat-driven generation of test cases and bug reports exported to Excel/PDF/Word, plus an automation recorder/executor and a UI element inspector."
+    },
+    {
+      "name": "AWeSim Simulator Automation (Desktop)",
+      "type": "professional",
+      "stack": ["Java", "Selenium", "TestNG", "Apache POI", "C#", "Unreal Engine 4.2"],
+      "repo": null,
+      "description": "Automated UI verification, regression, and long-duration endurance sessions; Hybrid framework with POM, wait utilities, and externalized test data; data-driven execution via Excel and configuration files."
+    },
+    {
+      "name": "DS Simulator Automation (Desktop)",
+      "type": "professional",
+      "stack": ["Java", "Selenium", "TestNG", "Apache POI", "Unreal Engine 4.2/5.1", "Reality Engine"],
+      "repo": null,
+      "description": "Automated sanity, functional, and integration suites; maintained Selenium–Java Hybrid framework with POM; external test data and runtime parameters via POI and config files."
+    },
+    {
+      "name": "Map Reading VR Simulator (VR)",
+      "type": "professional",
+      "stack": ["C#", "Unreal Engine 5.1"],
+      "repo": null,
+      "description": "Functional, regression, and endurance testing of a VR Map Reading simulator; verified interaction responsiveness, motion controls, and immersive behaviors; defects logged in JIRA/TFS with reproduction steps."
+    },
+    {
+      "name": "Funwork Analytics Tool (Web/Desktop)",
+      "type": "professional",
+      "stack": ["Java", "Selenium WebDriver", "Apache POI", "JavaMail API"],
+      "repo": null,
+      "description": "Automated analytics tasks including data extraction and Excel consolidation, with emailed reporting via JavaMail."
+    },
+    {
+      "name": "EmailApp",
+      "type": "personal",
+      "stack": ["JavaScript", "React", "Node.js", "HTML", "CSS"],
+      "repo": "https://github.com/Shashi1912/EmailApp",
+      "status": "public",
+      "description": "Full-stack email application with a React frontend and Node backend, XML-based configuration for email settings."
+    },
+    {
+      "name": "email-sender-app",
+      "type": "personal",
+      "stack": ["HTML", "JavaScript", "Node.js"],
+      "repo": "https://github.com/Shashi1912/email-sender-app",
+      "status": "public",
+      "description": "Lightweight web email sender: single-page frontend with a Node server."
+    },
+    {
+      "name": "QuickEmailSender",
+      "type": "personal",
+      "stack": [],
+      "repo": "https://github.com/Shashi1912/QuickEmailSender",
+      "status": "public, empty placeholder",
+      "description": "Empty repository — either populate or remove before sharing the portfolio."
+    }
+  ],
+  "certifications": [
+    {"year": 2025, "name": "Project Management Professional", "issuer": "Coursera"},
+    {"year": 2025, "name": "Prompt Engineering for Generative AI", "issuer": "Coursera"},
+    {"year": 2025, "name": "ISTQB Foundation Level Certification", "issuer": "ISTQB", "status": "in progress"}
+  ],
+  "achievements": [
+    {"year": 2022, "name": "Key Contributor Award", "detail": "Automating simulator test flows and stabilizing long-duration checks"},
+    {"year": 2023, "name": "Excellence in QA", "detail": "Consistent defect reproduction, documentation, and cross-team collaboration"},
+    {"year": 2024, "name": "Innovation in Automation", "detail": "Reusable POM components and configuration-driven execution"},
+    {"year": 2024, "name": "Process Improvement Award", "detail": "POI-based Excel consolidation to reduce manual reporting"}
+  ],
+  "education": [
+    {
+      "degree": "B.Tech in Electrical and Electronics Engineering",
+      "institution": "Mallareddy Institute of Engineering and Technology, JNTUH",
+      "start": 2015,
+      "end": 2019
+    }
+  ],
+  "github_profile": {
+    "login": "Shashi1912",
+    "name": "Angajala Shashikumar",
+    "bio": "Software Test Engineer",
+    "member_since": "2021-06-08",
+    "public_repos": 4,
+    "avatar_url": "https://avatars.githubusercontent.com/u/85537372?v=4"
+  },
+  "strengths": [
+    "Strong understanding of software testing and defect life cycles",
+    "Clear communication and documentation; collaborative team contributor",
+    "Quick to learn and adopt new tools and frameworks",
+    "Focus on process improvement, durable test artifacts, and knowledge sharing"
+  ]
+}

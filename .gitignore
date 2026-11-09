@@ -1,0 +1,9 @@
+# Local tooling
+.claude/
+
+# Retired photo assets kept on disk only (replaced by hand-drawn SVGs)
+assets/morpho-real.png
+assets/caterpillar-real.png
+
+# Stale design screenshot
+preview.png
