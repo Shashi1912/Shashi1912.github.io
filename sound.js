@@ -92,14 +92,19 @@
       enabled = false;
       label.textContent = 'Sound unavailable';
       status.textContent = 'This browser could not start audio.';
-    } finally { toggle.disabled = false; }
+    } finally { toggle.disabled = false; toggle.title = label.textContent; }
   });
   volume.addEventListener('input', setLevel);
-  window.addEventListener('bugfound', ({detail}) => {
+  /* Field games: each catch rises a step; a cleared game plays an arpeggio, all games a longer fanfare. */
+  window.addEventListener('gameprogress', ({detail}) => {
     if (!enabled || document.hidden || !context) return;
-    tone(392 + detail * 62, context.currentTime + .02, 1.2, .09, 'triangle');
-    if (detail === 5)
-      [523.25, 659.25, 783.99, 1046.5].forEach((n, i) => tone(n, context.currentTime + .2 + i * .13, 1.8, .08));
+    tone(392 * Math.pow(2, detail.n / detail.total), context.currentTime + .02, 1.2, .09, 'triangle');
+  });
+  window.addEventListener('gamecomplete', ({detail}) => {
+    if (!enabled || document.hidden || !context) return;
+    const notes = detail.all ? [523.25, 659.25, 783.99, 1046.5, 1318.51, 1567.98, 2093] : [523.25, 659.25, 783.99, 1046.5];
+    notes.forEach((n, i) => tone(n, context.currentTime + .25 + i * .13, 1.8, .08));
+    if (detail.all) [261.63, 329.63, 392].forEach(n => tone(n, context.currentTime + .25, 4, .05));
   });
   window.addEventListener('metamorphosis', ({detail}) => {
     if (!enabled || document.hidden || !context) return;

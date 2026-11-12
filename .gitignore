@@ -7,3 +7,8 @@ assets/caterpillar-real.png
 
 # Stale design screenshot
 preview.png
+
+# Dev-only test tooling
+node_modules/
+test-results/
+playwright-report/

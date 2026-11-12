@@ -1,0 +1,12 @@
+{
+  "name": "shashi-portfolio",
+  "private": true,
+  "description": "Static portfolio site. The only dependency is the dev-only test runner; the site itself ships no packages.",
+  "scripts": {
+    "serve": "python -m http.server 8765 --bind 127.0.0.1",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

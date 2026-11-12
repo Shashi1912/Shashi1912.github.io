@@ -173,14 +173,7 @@ nav strong{display:flex;align-items:center;gap:9px}
 .hidebug.caught svg{animation:bugPop .7s}
 @keyframes bugPop{0%{transform:scale(.3) rotate(-30deg)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
 .hb-hero{position:absolute;bottom:56px;left:6%;z-index:2}
-.hunt{position:fixed;bottom:18px;right:18px;z-index:30;display:flex;align-items:center;gap:9px;background:#102d25ed;border:1px solid #b8c8a94d;border-radius:40px;padding:9px 16px;color:#ecf1df;font-size:12px;backdrop-filter:blur(12px);box-shadow:0 4px 22px #001b2222}
-.hunt .hicon{width:26px;height:11px;display:inline-block;flex:none}
-.hunt .hicon svg{width:100%;height:100%;display:block;overflow:visible}
-.hunt b{color:#c7e6a6}
-.hunt a{color:#c7e6a6;text-decoration:underline;text-underline-offset:3px}
-.hunt.done{border-color:#c7e6a6}
-#intro:not(.done)~.hunt{display:none}
-@media(max-width:760px){.hunt{bottom:66px;right:10px;padding:7px 12px;font-size:11px;max-width:62vw}.hb-hero{bottom:30px;left:8%}}
+@media(max-width:760px){.hb-hero{bottom:30px;left:8%}}
 @media(prefers-reduced-motion:reduce){.hidebug.caught svg{animation:none}}
 
 /* Motion-quality layer — JS flight replaces keyframe paths; parallax vars; word reveals. */
@@ -220,3 +213,131 @@ h2.wsplit.seen .w{opacity:1;translate:0 0;rotate:0deg}
 .brandtext{display:none;font:600 26px Georgia,serif;letter-spacing:.04em}
 @media(prefers-reduced-motion:reduce){#brandfly{display:none}.brandtext{display:inline}}
 @media(max-width:760px){#brandfly{width:152px!important;height:34px!important}}
+
+/* Floating dock — sound and games live in two bobbing glass orbs instead of pill bars. */
+@keyframes orbBob{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.sound-panel{left:20px;bottom:20px;gap:0;padding:5px;border-radius:40px;background:#102d25e6;border-color:#c7e6a640;box-shadow:0 8px 26px #001b2240;animation:orbBob 5.2s ease-in-out infinite}
+#soundToggle{width:46px;height:46px;padding:0;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#2f6a52,#123528 72%);border:1px solid #c7e6a655;transition:scale .25s,box-shadow .3s}
+#soundToggle:hover{scale:1.08}
+.sound-panel button span:first-child{margin:0}
+.snote{font-size:19px;line-height:1}
+.eq{display:none;align-items:flex-end;gap:2.5px;height:17px}
+.eq i{display:block;width:3px;height:35%;border-radius:2px;background:#c7e6a6;animation:eqBar .8s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:-.3s;animation-duration:.62s}.eq i:nth-child(3){animation-delay:-.55s;animation-duration:.9s}.eq i:nth-child(4){animation-delay:-.15s;animation-duration:.7s}
+@keyframes eqBar{to{height:100%}}
+#soundToggle[aria-pressed="true"]{box-shadow:0 0 0 3px #4fe39a33,0 0 18px #4fe39a55}
+#soundToggle[aria-pressed="true"] .eq{display:flex}
+#soundToggle[aria-pressed="true"] .snote{display:none}
+.sound-panel .vol{display:flex;align-items:center;gap:7px;width:0;opacity:0;overflow:hidden;transition:width .35s,opacity .3s,margin .35s}
+.sound-panel:hover .vol,.sound-panel:focus-within .vol{width:118px;opacity:1;margin:0 12px 0 8px}
+.sound-panel input{width:72px}
+#intro:not(.done)~.sound-panel,#intro:not(.done)~.quest{display:none}
+
+.quest{position:fixed;right:20px;bottom:20px;z-index:30;color:#ecf1df;animation:orbBob 5.2s ease-in-out -2.6s infinite}
+#questOrb{position:relative;width:56px;height:56px;padding:0;border-radius:50%;display:grid;place-items:center;color:inherit;border:1px solid #c7e6a655;background:radial-gradient(circle at 35% 30%,#2f6a52,#102d25 72%);box-shadow:0 8px 26px #001b2240;backdrop-filter:blur(12px);transition:scale .25s}
+#questOrb:hover{scale:1.08}
+#questOrb .ring{position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);rotate:-90deg;overflow:visible}
+.ring circle{fill:none;stroke-width:3}
+.ring .track{stroke:#c7e6a62e}
+.ring .fill{stroke:#4fe39a;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset .9s cubic-bezier(.3,.7,.3,1);filter:drop-shadow(0 0 3px #4fe39a99)}
+.qicon{width:34px;height:15px;display:block}
+.qicon svg{width:100%;height:100%;display:block;overflow:visible}
+.alldone .qicon{width:38px;height:32px}
+.qbadge{position:absolute;top:-9px;right:-12px;padding:4px 7px;border-radius:12px;background:#d9edab;color:#163126;font:700 10px/1 "Segoe UI",sans-serif;box-shadow:0 2px 8px #0005}
+.quest:not(.started) #questOrb:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #4fe39a;animation:orbPing 2.8s ease-out infinite;pointer-events:none}
+@keyframes orbPing{0%{scale:1;opacity:.75}70%,100%{scale:1.65;opacity:0}}
+#questOrb.pulse{animation:orbPulse .9s ease-out}
+@keyframes orbPulse{0%{box-shadow:0 8px 26px #001b2240,0 0 0 0 #4fe39acc}100%{box-shadow:0 8px 26px #001b2240,0 0 0 26px #4fe39a00}}
+.alldone #questOrb{border-color:#e8c35a;background:radial-gradient(circle at 35% 30%,#6f8a3c,#1c3a22 72%)}
+.alldone .ring .fill{stroke:#e8c35a;filter:drop-shadow(0 0 4px #e8c35aaa)}
+.alldone .qbadge{background:#e8c35a}
+.quest-tip{position:absolute;right:0;bottom:74px;width:max-content;max-width:min(270px,72vw);padding:10px 14px;border-radius:16px 16px 4px 16px;background:#fffef7;color:#183a2c;font-size:12.5px;line-height:1.45;box-shadow:0 12px 30px #00110c40;opacity:0;translate:0 8px;scale:.94;transform-origin:bottom right;transition:opacity .35s,translate .35s,scale .35s;pointer-events:none}
+.quest-tip.show{opacity:1;translate:0 0;scale:1}
+.quest-panel{position:absolute;right:0;bottom:74px;width:min(320px,calc(100vw - 32px));padding:18px 18px 8px;border-radius:20px;background:#102d25f5;border:1px solid #c7e6a640;box-shadow:0 22px 50px #00110c66;backdrop-filter:blur(14px);transform-origin:bottom right;animation:panelIn .4s cubic-bezier(.2,.8,.3,1.2)}
+.quest-panel[hidden]{display:none}
+@keyframes panelIn{from{opacity:0;scale:.85;translate:0 12px}}
+.quest-panel h3{font:400 21px/1.1 Georgia,serif;margin:0}
+.quest-panel .qsub{display:block;margin-top:4px;color:#9fb79b;font-size:10px}
+.quest-panel ul{list-style:none;margin:12px 0 0;padding:0}
+.quest-panel li{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid #c7e6a61f}
+.quest-panel li[hidden]{display:none}
+.gico{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#1d4436;color:#c7e6a6}
+.gico svg{width:28px;height:auto;max-height:26px;overflow:visible}
+.quest-panel li b{display:block;font-size:13.5px;font-weight:600}
+.quest-panel li small{display:block;font:12px/1.45 "Segoe UI",sans-serif;letter-spacing:0;text-transform:none;color:#b8cbb1;margin-top:2px}
+.gbar{display:block;height:3px;margin-top:7px;border-radius:3px;background:#c7e6a622;overflow:hidden}
+.gbar i{display:block;width:0;height:100%;background:linear-gradient(90deg,#2fa96b,#aef7cf);transition:width .7s}
+.gcount{font:600 12px monospace;color:#c7e6a6;white-space:nowrap}
+.quest-panel li.won .gico{background:#d9edab;color:#163126}
+.quest-panel li.won .gcount:after{content:" ✓"}
+.quest-panel li.won .gbar i{background:linear-gradient(90deg,#d9a93f,#f7e8b0)}
+
+/* Celebration — a card with a butterfly emerging, over a canvas swarm. */
+#swarm{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:44}
+.celebrate{position:fixed;inset:0;z-index:45;display:grid;place-items:center;padding:20px;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,#0c221c66,transparent 62%);opacity:0;transition:opacity .45s}
+.celebrate[hidden]{display:none}
+.celebrate.show{opacity:1}
+.cel-card{pointer-events:auto;position:relative;width:min(390px,100%);padding:24px 26px 24px;text-align:center;border-radius:24px;color:#eef3e6;background:linear-gradient(160deg,#1d4134,#0d231a);border:1px solid #4fe39a66;box-shadow:0 30px 80px #00110c99,inset 0 0 0 1px #aef7cf1c;scale:.7;translate:0 40px;filter:blur(6px);transition:scale .65s cubic-bezier(.2,.9,.3,1.25),translate .65s,filter .5s}
+.celebrate.show .cel-card{scale:1;translate:0 0;filter:none}
+.cel-fly{width:160px;aspect-ratio:540/460;margin:-86px auto 6px;filter:drop-shadow(0 14px 16px #000b)}
+.cel-fly svg{width:100%;height:100%;overflow:visible}
+.cel-fly .wing-left,.cel-fly .wing-right{animation-duration:.9s}
+.celebrate.show .cel-fly{animation:celEmerge 1.2s cubic-bezier(.2,.8,.3,1.3) both}
+@keyframes celEmerge{0%{opacity:0;scale:.1;rotate:-30deg;translate:0 60px}60%{opacity:1;scale:1.15;rotate:7deg}100%{opacity:1;scale:1;rotate:0deg;translate:0 0}}
+.cel-card small{display:block;color:#8fc49a;font-size:10px;letter-spacing:.22em}
+.cel-card h3{font:400 31px/1.12 Georgia,serif;margin:6px 0 10px;background:linear-gradient(90deg,#aef7cf,#ffffff,#e8c35a,#aef7cf);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:celShine 3.2s linear infinite}
+@keyframes celShine{to{background-position:300% 0}}
+.cel-card p{color:#c9d8c3;font-size:14px;line-height:1.65}
+.cel-card a{color:#d9edab;text-decoration:underline;text-underline-offset:3px}
+#celClose{margin-top:18px;background:#d9edab;color:#163126;border:0}
+.celebrate.grand .cel-card{border-color:#e8c35aaa;box-shadow:0 30px 90px #00110c99,0 0 60px #e8c35a33}
+.celebrate.grand .cel-fly{width:200px;margin-top:-108px}
+.celebrate.grand .cel-card small{color:#e8c35a}
+
+/* Butterfly catch — the hero drifters are now catchable. */
+.drift{pointer-events:auto;cursor:pointer;transition:opacity .8s}
+.drift.caught{opacity:0;pointer-events:none;transition:opacity 1.4s}
+
+/* Contact highlights — resume and email as shimmering cards with perched butterflies. */
+.reach{margin-top:30px}
+.reach>p:first-child{font-size:14px;color:#49584c;margin:0 0 14px}
+.reach-cta{display:grid;gap:16px;max-width:460px}
+.flycta{position:relative;display:flex;align-items:center;gap:16px;padding:16px 20px 16px 14px;border-radius:18px;color:#183a2c;text-decoration:none!important;border:1.5px solid transparent;background:linear-gradient(#fffef7,#fffef7) padding-box,linear-gradient(110deg,#2fa96b,#aef7cf,#e8c35a,#4fe39a,#2fa96b) border-box;background-size:100% 100%,300% 100%;animation:ctaShine 6s linear infinite;box-shadow:0 8px 24px #1c352a14;transition:translate .35s,box-shadow .35s}
+@keyframes ctaShine{to{background-position:0 0,300% 0}}
+.flycta:hover,.flycta:focus-visible{translate:0 -4px;box-shadow:0 18px 36px #1c352a33}
+.flycta.resume{background:linear-gradient(115deg,#fdf6df,#fffef7 60%) padding-box,linear-gradient(110deg,#d9a93f,#f7e8b0,#4fe39a,#e8c35a,#d9a93f) border-box;background-size:100% 100%,300% 100%}
+.ctafly{flex:none;width:62px;aspect-ratio:540/460;filter:drop-shadow(0 5px 5px #16301f44);transition:translate .5s cubic-bezier(.3,.7,.3,1.3),rotate .5s}
+.ctafly svg{width:100%;height:100%;overflow:visible}
+.ctafly .morpho{animation:none}
+.ctafly .wing-left,.ctafly .wing-right{animation-duration:2.6s}
+.flycta.resume .ctafly{filter:hue-rotate(-105deg) saturate(1.3) brightness(1.08) drop-shadow(0 5px 5px #4a360a44)}
+.flycta:hover .ctafly,.flycta:focus-visible .ctafly{translate:0 -10px;rotate:-10deg}
+.flycta:hover .ctafly .wing-left,.flycta:hover .ctafly .wing-right,.flycta:focus-visible .ctafly .wing-left,.flycta:focus-visible .ctafly .wing-right{animation-duration:.42s}
+.ctatext{min-width:0}
+.flycta b{display:block;font:600 17px/1.25 "Segoe UI",sans-serif;letter-spacing:-.01em}
+.flycta small{display:block;margin-top:3px;font:12.5px/1.4 "Segoe UI",sans-serif;letter-spacing:0;text-transform:none;color:#5e6b5e;overflow-wrap:anywhere}
+.flycta .arr{margin-left:auto;font-size:20px;color:#2f5a42;transition:translate .3s}
+.flycta.resume:hover .arr{translate:0 4px}
+.flycta.mail:hover .arr{translate:3px -3px}
+.reach-links{margin-top:16px;font-size:13px;color:#49584c}
+.pfly{position:absolute;width:21px;color:var(--c);pointer-events:none;opacity:0;filter:drop-shadow(0 2px 2px #06140d33)}
+.pfly svg{display:block;width:100%;height:auto;overflow:visible;transition:transform .7s cubic-bezier(.3,.6,.3,1),opacity .55s}
+.pfly .fwl,.pfly .fwr{transform-box:fill-box;animation:microFlap 1.4s ease-in-out infinite alternate}
+.pfly .fwl{transform-origin:100% 50%}.pfly .fwr{transform-origin:0% 50%}
+.reach.seen .pfly{animation:perchIn 1.9s cubic-bezier(.2,.7,.3,1) var(--d) both}
+@keyframes perchIn{0%{opacity:0;translate:var(--fx) var(--fy);rotate:50deg}65%{opacity:1}100%{opacity:1;translate:0 0;rotate:var(--rt)}}
+.flycta:hover .pfly svg,.flycta:focus-visible .pfly svg{transform:translate(var(--sx),var(--sy)) rotate(28deg);opacity:0}
+.flycta:hover .pfly .fwl,.flycta:hover .pfly .fwr{animation-duration:.14s}
+.flylink .lfly{display:inline-block;width:14px;margin-right:4px;vertical-align:-2px;color:#7fd39e;transition:translate .4s}
+.flylink .lfly svg{display:block;width:100%;height:auto;overflow:visible}
+.flylink .fwl,.flylink .fwr{transform-box:fill-box;animation:microFlap 1.6s ease-in-out infinite alternate}
+.flylink .fwl{transform-origin:100% 50%}.flylink .fwr{transform-origin:0% 50%}
+.flylink:hover .lfly{translate:0 -4px}
+.flylink:hover .fwl,.flylink:hover .fwr{animation-duration:.16s}
+@media(max-width:760px){.sound-panel{left:12px;bottom:12px}.quest{right:12px;bottom:12px}.cel-fly{width:130px;margin-top:-70px}.celebrate.grand .cel-fly{width:160px;margin-top:-86px}.cel-card h3{font-size:26px}.flycta{padding:14px 16px 14px 12px;gap:12px}.ctafly{width:52px}footer{padding-bottom:96px}}
+@media(prefers-reduced-motion:reduce){.sound-panel,.quest,.flycta{animation:none}.cel-card{transition:none;scale:1;translate:0 0;filter:none}.celebrate,.quest-tip,.sound-panel .vol{transition:none}.pfly{opacity:1}.pfly svg{transition:none}.ctafly,.flylink .lfly{transition:none}}
+/* Beckon — after a game win, "Keep exploring" lands on the resume card and it glows twice. */
+.flycta.beckon{animation:ctaShine 6s linear infinite,beckon 1.3s ease-out .5s 3}
+@keyframes beckon{0%{box-shadow:0 8px 24px #1c352a14,0 0 0 0 #e8c35acc}100%{box-shadow:0 8px 24px #1c352a14,0 0 0 22px #e8c35a00}}
+.flycta.beckon .ctafly{animation:celEmerge 1s cubic-bezier(.2,.8,.3,1.3) .5s both}
+@media(prefers-reduced-motion:reduce){.flycta.beckon{animation:none;outline:3px solid #e8c35a;outline-offset:4px}}

@@ -1,0 +1,606 @@
+/* Feature layer — loaded after design.css. Test bench games, chaos mode, case studies, bug reports, engine replay,
+   AI desk, live scorecard, theme orb, and the night-grove (dark) theme at the bottom. */
+
+/* Shared bits */
+.subhead{font:400 clamp(26px,2.6vw,36px)/1.15 Georgia,serif;letter-spacing:-.02em;margin:10px 0 8px}
+.subnote,.ai-intro{font-size:14px;line-height:1.8;color:#647066;max-width:640px;margin:0 0 26px}
+.linkbtn{padding:0;border:0;border-radius:0;background:none;font-size:12px;font-weight:500;color:inherit;text-decoration:underline;text-underline-offset:3px}
+.kb-only{position:absolute;left:-9999px}
+.kb-only:focus{position:static;pointer-events:auto;background:#d9edab;color:#163126;border:0}
+.proj-actions{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:0 0 14px}
+.storybtn{padding:7px 14px;font-size:12px;border-color:#b9c6ad;color:#294936;transition:background .25s,color .25s}
+.storybtn:hover{background:#294936;color:#f0f3e6}
+.proj.feat .storybtn{border-color:#4f6f5c;color:#d9edab}
+.proj.feat .storybtn:hover{background:#d9edab;color:#163126}
+.proj.feat a.more{color:#cfe6b5}
+
+/* Dialogs: case study + engine replay */
+.dlg{width:min(640px,calc(100vw - 28px));max-height:calc(100vh - 40px);padding:30px 32px;border:1px solid #c7d3bd;border-radius:20px;background:#fffef7;color:#213d34;box-shadow:0 40px 100px #06181188;overflow:auto}
+.dlg::backdrop{background:#081611b8;backdrop-filter:blur(4px)}
+.dlg[open]{animation:dlgIn .4s cubic-bezier(.2,.8,.3,1.1)}
+@keyframes dlgIn{from{opacity:0;translate:0 24px;scale:.96}}
+.dlg-wide{width:min(940px,calc(100vw - 28px))}
+.dlg-close{position:absolute;top:12px;right:12px;width:36px;height:36px;padding:0;border-radius:50%;font-size:20px;line-height:1;border-color:#c7d3bd}
+.dlg h3{font:400 28px/1.15 Georgia,serif;letter-spacing:-.02em;margin:6px 36px 16px 0}
+.story-kind{display:block;font-size:10px;color:#5b7a52}
+.story-body section{padding:14px 0;border-top:1px solid #dfe5d6}
+.story-body h4,.fit-h{font:700 11px/1 "Segoe UI",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#56704b;margin:0 0 8px}
+.story-body p{font-size:14.5px;line-height:1.75;color:#4d5b50}
+.story-body .tags{margin-top:6px}
+
+/* Bug report gallery (inside the dark "Inside the test run" section) */
+#bugReportsHost{margin-top:64px}
+#bugReportsHost .subnote{color:#b9cbb4}
+.bugrep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.bugrep{background:#0f271e;border:1px solid #33523f;border-radius:10px;padding:20px 20px 18px;font-size:13px;color:#d6e2cf;display:flex;flex-direction:column}
+.bugrep header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.bid{font:600 11px Consolas,monospace;letter-spacing:.1em;color:#8fc49a}
+.sev{font:700 10px/1 "Segoe UI",sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:20px;background:#e8c35a;color:#2b2206}
+.sev-high{background:#f08a7a;color:#3a0d06}.sev-low{background:#aef7cf;color:#063222}
+.bugrep h4{font:500 17px/1.3 "Segoe UI",sans-serif;margin:0 0 4px;color:#fff}
+.barea{font-size:11.5px;color:#9db79f;margin:0 0 12px}
+.bugrep dl{margin:0}
+.bugrep dt{font:700 10px/1 "Segoe UI",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8fc49a;margin:12px 0 5px}
+.bugrep dd{margin:0;line-height:1.6}
+.bugrep ol,.bugrep ul{margin:0;padding-left:18px}
+.bugrep a.more{margin-top:14px;color:#cfe6b5;text-decoration:underline;text-underline-offset:3px;font-size:12.5px}
+.ai-bug{background:#18372b}
+
+/* Test bench */
+.arcade{margin-top:84px}
+#arcadeHost{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.arc{background:#fffef7;border:1px solid #d1d9c7;border-radius:10px;padding:22px;display:flex;flex-direction:column;min-width:0;scroll-margin-top:96px}
+.arc header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.arc h4{font:500 19px/1.2 "Segoe UI",sans-serif;letter-spacing:-.01em;margin:0}
+.arc-chip{font:700 10px/1 "Segoe UI",sans-serif;letter-spacing:.08em;padding:5px 9px;border-radius:20px;background:#d9edab;color:#163126;white-space:nowrap}
+.arc.solved{border-color:#8fc49a}
+.arc-intro{font-size:13.5px;line-height:1.6;color:#5e6b5e;margin:6px 0 14px}
+.arc-status{min-height:20px;margin:12px 0 0;font-size:13px;color:#2f5a42;font-weight:500}
+.arc button{font-size:13px}
+.mock{border:1px solid #cfd8c4;border-radius:10px;padding:14px;background:#f5f5ed;display:grid;gap:6px}
+.mk{display:block;width:100%;text-align:left;padding:8px 10px;border:1px dashed transparent;border-radius:6px;background:none;font-size:13.5px;font-weight:400}
+.mk:hover{border-color:#9fb48f;background:#eef2e4}
+.mk-title{font:600 16px "Segoe UI",sans-serif}.mk-total{font-weight:700;border-top:1px solid #cfd8c4;border-radius:0 0 6px 6px}
+.mk-label{color:#5e6b5e;font-size:12px}
+.mk-pay{background:#223e33;color:#fff;text-align:center;font-weight:600}.mk-pay:hover{background:#2f5a42}
+.mk.fixed{border-color:#2fa96b;background:#e2f3dc}
+.mk.fixed.mk-pay{background:#2fa96b;color:#06281a}
+.arc-run{align-self:flex-start;background:#223e33;color:#fff;border:0;padding:10px 18px}
+.runlog{list-style:none;margin:12px 0 0;padding:10px 12px;min-height:44px;background:#0d231a;border-radius:8px;font:12px/1.7 Consolas,monospace;color:#9db79f}
+.runlog .ok{color:#8fe3b0}.runlog .fail{color:#ffb4a6}
+.arc-q{margin-top:14px}
+.arc-q>p,.arc-report{font-weight:600;font-size:14px;margin:0 0 8px}
+.arc-report{font:italic 16px/1.5 Georgia,serif;font-weight:400;padding:10px 14px;border-left:3px solid #2fa96b;background:#f0f4e7;border-radius:0 8px 8px 0;margin-bottom:12px}
+.arc-opt,.arc-ask{display:block;width:100%;text-align:left;margin:0 0 6px;padding:9px 13px;border-radius:8px;border-color:#cfd8c4;font-weight:400;line-height:1.4}
+.arc-opt:hover,.arc-ask:hover{background:#eef2e4}
+.arc-opt.right{background:#d9edab;border-color:#2fa96b;color:#163126}
+.arc-opt.wrong{background:#fbe6e1;border-color:#e2a497;color:#5a1a10}
+.arc-ask:disabled{opacity:.45;cursor:default}
+.arc-chat p{margin:0 0 8px;font-size:13px;line-height:1.5;padding:8px 12px;background:#f0f4e7;border-radius:8px}
+.arc-chat b{display:block;font-weight:600;color:#2f5a42}
+.arc-free{display:flex;gap:8px;margin:4px 0 10px;background:none;border:0;padding:0}
+.arc-free input{flex:1}.arc-free button{padding:9px 16px;background:#223e33;color:#fff}
+.logbox{background:#0d231a;border-radius:8px;padding:8px;display:grid;gap:1px}
+.logline{display:grid;grid-template-columns:26px 52px 1fr;gap:8px;width:100%;text-align:left;padding:5px 8px;border:1px solid transparent;border-radius:4px;background:none;font:12px/1.5 Consolas,monospace;color:#b9cbb4;font-weight:400}
+.logline:hover{border-color:#3f5c4c;background:#143024}
+.logline .ln{color:#587464}.lv-warn .lv{color:#e8c35a}.lv-error .lv{color:#ffb4a6}.lv-info .lv{color:#7fb596}
+.logline.right{background:#1f4a35;border-color:#4fe39a;color:#e9ffd4}
+.logline.wrong{border-color:#8a4638;background:#2a1c18}
+
+/* Chaos mode + orb panel footer */
+.quest-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:12px 0 8px;border-top:1px solid #c7e6a61f;font-size:12px}
+.chaos-switch{display:flex;align-items:center;gap:7px;margin:0 auto 0 0;font-weight:500;cursor:pointer}
+.chaos-switch input{width:16px;height:16px;padding:0;accent-color:#e8c35a;cursor:pointer}
+.badge-btn{display:none;color:#e8c35a}
+.alldone .badge-btn{display:inline}
+.quest-panel{max-height:calc(100vh - 120px);overflow:auto}
+.quest-panel li b a{text-decoration:underline;text-decoration-color:#c7e6a655;text-underline-offset:3px}
+.chaos-banner{position:fixed;left:50%;top:92px;translate:-50% 0;z-index:29;padding:9px 18px;border-radius:30px;background:#3a2a06f2;color:#f7e8b0;border:1px solid #e8c35a88;font-size:12.5px;box-shadow:0 10px 30px #0006;max-width:calc(100vw - 24px);text-align:center}
+.chaos-banner[hidden]{display:none}
+.chaos-on [data-chaos]{cursor:crosshair}
+#celBadge{margin:18px 8px 0 0;background:#e8c35a;color:#2b2206;border:0}
+#celBadge[hidden]{display:none}
+
+/* Theme orb */
+.theme-orb{position:fixed;left:25px;bottom:92px;z-index:30;width:42px;height:42px;padding:0;border-radius:50%;display:grid;place-items:center;font-size:18px;line-height:1;color:#ecf1df;border:1px solid #c7e6a655;background:radial-gradient(circle at 35% 30%,#2f6a52,#123528 72%);box-shadow:0 8px 22px #001b2240;animation:orbBob 5.2s ease-in-out -1.3s infinite;transition:scale .25s}
+.theme-orb:hover{scale:1.08}
+.theme-orb .tsun{display:none}
+[data-theme="dark"] .theme-orb .tsun{display:inline}[data-theme="dark"] .theme-orb .tmoon{display:none}
+#intro:not(.done)~.theme-orb{display:none}
+
+/* Engine replay */
+.replay{display:grid;grid-template-columns:230px 1fr;gap:26px;align-items:start}
+.calc{position:relative;background:#1b2a24;border-radius:12px;padding:0 10px 10px;color:#e9f1e2;box-shadow:0 14px 30px #0b1f1733}
+.calc-bar{font:11px "Segoe UI",sans-serif;padding:8px 2px;color:#a9bfa3}
+.calc-out{text-align:right;font:300 34px/1.2 "Segoe UI",sans-serif;padding:14px 8px 10px;min-height:66px}
+.calc-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.calc-keys i{display:grid;place-items:center;height:36px;border-radius:5px;background:#2a3d35;font:normal 14px "Segoe UI",sans-serif;transition:background .2s,scale .2s}
+.calc-keys i[data-aid]{background:#35503f}
+.calc-keys i.hit{background:#4fe39a;color:#06281a;scale:.92}
+.calc-cursor{position:absolute;left:0;top:0;width:16px;height:16px;margin:-3px 0 0 -3px;border-radius:50%;border:2px solid #e8c35a;background:#e8c35a55;opacity:0;pointer-events:none;transition:translate .5s cubic-bezier(.3,.7,.3,1),opacity .3s}
+.phases{list-style:none;display:flex;gap:6px;margin:0 0 12px;padding:0;flex-wrap:wrap}
+.phases li{font:600 10.5px/1 Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border-radius:20px;border:1px solid #cfd8c4;color:#6b786b;transition:background .25s,color .25s}
+.phases li.on{background:#223e33;border-color:#223e33;color:#aef7cf}
+.replay-now{min-height:44px;font-size:14px;line-height:1.55;margin:0 0 12px}
+.turns{width:100%;border-collapse:collapse;font-size:12.5px}
+.turns th{text-align:left;font:700 10px/1 "Segoe UI",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#6b786b;padding:6px 8px;border-bottom:1px solid #cfd8c4}
+.turns td{padding:6px 8px;border-bottom:1px solid #e6ebdd;font-family:Consolas,monospace}
+.turns tr.cur td{background:#eef2e4}.turns tr.done .v{color:#1f7a4d;font-weight:700}
+.replay .actions{margin-top:16px;gap:8px}
+#replayPlay{background:#223e33;color:#fff;border:0}
+.replay-facts{font-size:12.5px;line-height:1.6;color:#5e6b5e;margin:14px 0 0}
+
+/* Live scorecard */
+#hood{background:#e9eddf}
+.scores{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid #cad3c2;border-radius:6px;background:#fffef7dd}
+.score{padding:22px 12px;text-align:center;border-right:1px solid #cad3c2;min-width:0}
+.score:last-child{border-right:0}
+.score b{display:block;font:400 clamp(24px,2.4vw,34px)/1.1 Georgia,serif;color:#294936;white-space:nowrap}
+.score small{display:block;margin-top:8px;font:600 10px/1.4 monospace;letter-spacing:.12em;text-transform:uppercase;color:#56704b}
+.score span{display:block;margin-top:4px;font-size:11.5px;color:#6b786b;line-height:1.4}
+.score-note{margin:18px 0 0;font-size:13.5px;color:#5e6b5e}
+.score-note a.more{color:#2f5a42;text-decoration:underline;text-underline-offset:3px}
+
+/* AI desk */
+#ai{background:var(--paper)}
+.ai-mode{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 16px;border:1px solid #d1d9c7;border-radius:10px;background:#fffef7;font-size:13px;line-height:1.5;margin-bottom:18px}
+.ai-dot{flex:none;width:9px;height:9px;border-radius:50%;background:#b9c6ad}
+.ai-mode.model .ai-dot{background:#2fa96b;box-shadow:0 0 0 4px #2fa96b33}.ai-mode.rules .ai-dot{background:#d9a93f}
+.ai-mode-text{flex:1;min-width:220px}
+.ai-use{display:flex;align-items:center;gap:6px;margin:0;font-weight:600;cursor:pointer}
+.ai-use[hidden]{display:none}
+.ai-use input{width:16px;height:16px;padding:0;accent-color:#2fa96b}
+.ai-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:-1px}
+.ai-tab{border-radius:10px 10px 0 0;border:1px solid #d1d9c7;border-bottom-color:transparent;background:#e9eddf;padding:11px 18px;font-size:13px;color:#4d5b50}
+.ai-tab[aria-selected="true"]{background:#fffef7;color:#213d34;font-weight:600;border-bottom-color:#fffef7}
+.ai-panel{border:1px solid #d1d9c7;border-radius:0 10px 10px 10px;background:#fffef7;padding:24px}
+.ai-panel[hidden]{display:none}
+.ai-panel label{margin-top:0}
+.ai-panel .actions{margin-top:14px;align-items:center;gap:16px}
+.ai-go{background:#223e33;color:#fff;border:0}
+.ai-go:disabled{opacity:.55}
+.ai-status{min-height:18px;margin:10px 0 0;font-size:13px;color:#2f5a42}
+.ai-out{margin-top:6px}
+.ai-out:empty{display:none}
+.ai-answer{font-size:14.5px;line-height:1.75;margin:0 0 12px;white-space:pre-wrap}
+.ai-by{font-size:12px;color:#6b786b;margin:14px 0 0;padding-top:10px;border-top:1px dashed #cfd8c4}
+.ai-scroll{overflow-x:auto;margin-bottom:12px}
+.ai-table{width:100%;min-width:640px;border-collapse:collapse;font-size:13px;line-height:1.5}
+.ai-table th{text-align:left;font:700 10px/1 "Segoe UI",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#56704b;padding:8px 10px;border-bottom:1px solid #cfd8c4;white-space:nowrap}
+.ai-table td{padding:9px 10px;border-bottom:1px solid #e6ebdd;vertical-align:top}
+.ai-table td:first-child{font-family:Consolas,monospace;white-space:nowrap;color:#56704b}
+.tc-type{font-weight:600;white-space:nowrap}
+.t-negative{color:#a8402c}.t-boundary{color:#8a6410}.t-security{color:#5b3fa0}.t-positive{color:#1f7a4d}.t-usability{color:#1c6a86}
+.fit-top{display:flex;align-items:baseline;gap:14px;margin-bottom:14px}
+.fit-score{font:400 44px/1 Georgia,serif;color:#294936}
+.fit-h{margin-top:16px}
+.fit-yes span{background:#d9edab;border-color:#b5d38a!important;color:#163126}
+.fit-no span{background:#fbe6e1;border-color:#e2a497!important;color:#5a1a10}
+.fit-ev{margin:0;padding-left:18px;font-size:13px;line-height:1.6;color:#4d5b50}
+
+@media(max-width:900px){.bugrep-grid{grid-template-columns:1fr}.scores{grid-template-columns:repeat(3,1fr)}.score:nth-child(3){border-right:0}.score:nth-child(-n+3){border-bottom:1px solid #cad3c2}}
+@media(max-width:760px){#arcadeHost{grid-template-columns:1fr}.arcade{margin-top:56px}.replay{grid-template-columns:1fr}.calc{max-width:240px}.dlg{padding:24px 20px}.dlg h3{font-size:23px}.scores{grid-template-columns:repeat(2,1fr)}.score{border-bottom:1px solid #cad3c2}.score:nth-child(3){border-right:1px solid #cad3c2}.score:nth-child(even){border-right:0}.score:nth-last-child(-n+2){border-bottom:0}.theme-orb{left:17px;bottom:80px}.ai-panel{padding:18px}.ai-tab{padding:9px 12px;font-size:12px}.turns th:nth-child(3),.turns td:nth-child(3){display:none}.chaos-banner{top:80px}}
+@media(prefers-reduced-motion:reduce){.theme-orb,.dlg[open]{animation:none}.calc-cursor,.calc-keys i,.phases li{transition:none}}
+
+/* Night grove — the dark theme. data-theme is set on <html> before first paint and flipped by the theme orb. */
+:root[data-theme="dark"]{--ink:#e3ecda;--paper:#0d1d17;color-scheme:dark}
+[data-theme="dark"] body{background:var(--paper);color:var(--ink)}
+[data-theme="dark"] header{background:#0d1d17f2;border-bottom-color:#ffffff14}
+[data-theme="dark"] nav .btn,[data-theme="dark"] form button,[data-theme="dark"] #advance,[data-theme="dark"] .ai-go,[data-theme="dark"] .arc-run,[data-theme="dark"] #replayPlay,[data-theme="dark"] .arc-free button{background:#d9edab;color:#12261d}
+[data-theme="dark"] .pageprog{background:#1f3a2f}
+[data-theme="dark"] .mark{color:#9fca8f}
+[data-theme="dark"] section:not(.hero){border-bottom-color:#ffffff12}
+[data-theme="dark"] .expertise-strip,[data-theme="dark"] #journey,[data-theme="dark"] #projects,[data-theme="dark"] #hood{background:#11261e;border-color:#ffffff12}
+[data-theme="dark"] .label,[data-theme="dark"] h2 em,[data-theme="dark"] .node time,[data-theme="dark"] .proj small.kind,[data-theme="dark"] .story-kind,[data-theme="dark"] .score small,[data-theme="dark"] .ai-table th,[data-theme="dark"] .story-body h4,[data-theme="dark"] .fit-h{color:#9fca8f}
+[data-theme="dark"] .hero .label{color:#cfddae}
+[data-theme="dark"] #about p,[data-theme="dark"] .journey-heading>p,[data-theme="dark"] .journey-copy>p,[data-theme="dark"] .card p,[data-theme="dark"] .node p,[data-theme="dark"] .proj p,[data-theme="dark"] .panel p,[data-theme="dark"] .phase small,[data-theme="dark"] .reach>p:first-child,[data-theme="dark"] .reach-links,[data-theme="dark"] .stat small,[data-theme="dark"] .subnote,[data-theme="dark"] .ai-intro,[data-theme="dark"] .arc-intro,[data-theme="dark"] .score span,[data-theme="dark"] .score-note,[data-theme="dark"] .ai-by,[data-theme="dark"] .replay-facts,[data-theme="dark"] .story-body p,[data-theme="dark"] .fit-ev,[data-theme="dark"] .flycta small,[data-theme="dark"] .mk-label{color:#a9bcab}
+[data-theme="dark"] .proj.feat p{color:#c3d2bd}
+[data-theme="dark"] .tags span,[data-theme="dark"] .btn,[data-theme="dark"] button{border-color:#ffffff33}
+[data-theme="dark"] .grid,[data-theme="dark"] .card{border-color:#ffffff1c}
+[data-theme="dark"] .card:hover{background:#162e25}
+[data-theme="dark"] .card .glyph,[data-theme="dark"] .pic,[data-theme="dark"] .stat b,[data-theme="dark"] .score b,[data-theme="dark"] .fit-score,[data-theme="dark"] .proj a.more,[data-theme="dark"] .reach a,[data-theme="dark"] .score-note a.more,[data-theme="dark"] .arc-status,[data-theme="dark"] .ai-status,[data-theme="dark"] .arc-chat b,[data-theme="dark"] .flycta .arr{color:#c7e6a6}
+[data-theme="dark"] .phase-list,[data-theme="dark"] .phase{border-color:#ffffff24}
+[data-theme="dark"] .phase.active>span{background:#d9edab;color:#12261d}
+[data-theme="dark"] .journey-progress{background:#ffffff1f}
+[data-theme="dark"] .stats,[data-theme="dark"] .scores,[data-theme="dark"] .proj:not(.feat),[data-theme="dark"] .panel,[data-theme="dark"] form,[data-theme="dark"] .arc,[data-theme="dark"] .ai-panel,[data-theme="dark"] .ai-mode,[data-theme="dark"] .dlg{background:#132a21;border-color:#ffffff1f;color:var(--ink)}
+[data-theme="dark"] .arc-free{background:none}
+[data-theme="dark"] .stat,[data-theme="dark"] .score{border-color:#ffffff1c}
+[data-theme="dark"] .node:before{box-shadow:0 0 0 4px var(--paper)}
+[data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{background:#0d1d17;color:var(--ink);border-color:#ffffff2e}
+[data-theme="dark"] .storybtn{color:#d9edab;border-color:#4f6f5c}
+[data-theme="dark"] .storybtn:hover{background:#d9edab;color:#163126}
+[data-theme="dark"] .flycta{color:#e3ecda;background:linear-gradient(#132a21,#132a21) padding-box,linear-gradient(110deg,#2fa96b,#aef7cf,#e8c35a,#4fe39a,#2fa96b) border-box;background-size:100% 100%,300% 100%}
+[data-theme="dark"] .flycta.resume{background:linear-gradient(115deg,#2a2610,#132a21 60%) padding-box,linear-gradient(110deg,#d9a93f,#f7e8b0,#4fe39a,#e8c35a,#d9a93f) border-box;background-size:100% 100%,300% 100%}
+[data-theme="dark"] .mock{background:#0d1d17;border-color:#ffffff24}
+[data-theme="dark"] .mk:hover,[data-theme="dark"] .arc-opt:hover,[data-theme="dark"] .arc-ask:hover{background:#1b382c}
+[data-theme="dark"] .mk-total{border-top-color:#ffffff24}
+[data-theme="dark"] .mk.fixed{background:#1f4a35;border-color:#4fe39a}
+[data-theme="dark"] .mk-pay{background:#d9edab;color:#12261d}
+[data-theme="dark"] .arc-report,[data-theme="dark"] .arc-chat p{background:#0d1d17}
+[data-theme="dark"] .arc-opt,[data-theme="dark"] .arc-ask,[data-theme="dark"] .phases li,[data-theme="dark"] .dlg-close{border-color:#ffffff2e}
+[data-theme="dark"] .arc-opt.right{background:#d9edab;color:#163126}
+[data-theme="dark"] .arc-opt.wrong{background:#4a2018;border-color:#8a4638;color:#ffd9d0}
+[data-theme="dark"] .ai-tab{background:#0f231b;border-color:#ffffff1f;border-bottom-color:transparent;color:#a9bcab}
+[data-theme="dark"] .ai-tab[aria-selected="true"]{background:#132a21;color:var(--ink);border-bottom-color:#132a21}
+[data-theme="dark"] .ai-table td,[data-theme="dark"] .turns td,[data-theme="dark"] .story-body section,[data-theme="dark"] .ai-by{border-color:#ffffff1c}
+[data-theme="dark"] .ai-table th,[data-theme="dark"] .turns th{border-color:#ffffff2e}
+[data-theme="dark"] .ai-table td:first-child{color:#9fca8f}
+[data-theme="dark"] .t-negative{color:#ffb4a6}[data-theme="dark"] .t-boundary{color:#e8c35a}[data-theme="dark"] .t-security{color:#c9b3ff}[data-theme="dark"] .t-positive{color:#8fe3b0}[data-theme="dark"] .t-usability{color:#8fd6ea}
+[data-theme="dark"] .turns tr.cur td{background:#1b382c}[data-theme="dark"] .turns tr.done .v{color:#8fe3b0}
+[data-theme="dark"] .phases li.on{background:#d9edab;border-color:#d9edab;color:#12261d}
+[data-theme="dark"] .fit-no span{background:#4a2018;border-color:#8a4638!important;color:#ffd9d0}
+[data-theme="dark"] .dlg h3{color:#fff}
+
+/* Fixes: the site-wide sticky `header` rule must not reach card headers; transparent-bordered buttons stay borderless at night. */
+.arc header,.bugrep header{position:static;background:none;border:0;backdrop-filter:none;z-index:auto}
+[data-theme="dark"] .mk:not(:hover):not(.fixed),[data-theme="dark"] .logline:not(:hover):not(.right):not(.wrong){border-color:transparent}
+.quest-panel li{padding:9px 0}
+/* The dock holds still while it is being used: an open games panel or a hovered/focused orb does not bob. */
+.quest:has(.quest-panel:not([hidden])),.quest:hover,.quest:focus-within,.sound-panel:hover,.sound-panel:focus-within,.theme-orb:hover,.theme-orb:focus-visible{animation-play-state:paused}
+
+/* Layout pass — proof first, playground after. Hero facts, the mid-page band, theme toggle in the nav. */
+.hero-facts{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;max-width:520px}
+.hero-facts li{padding:6px 13px;border:1px solid #dce8d14d;border-radius:20px;font-size:12px;color:#e3ecda;background:#0c241b66;backdrop-filter:blur(4px)}
+#about .stats{margin:64px 0 0}
+.timeline{margin-top:36px}
+.midband{background:#18372b;color:#eef3e6;padding:72px 0}
+.midband .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:8%;align-items:start}
+.midband .label{color:#cfddae}
+.midband .subhead{color:#fff;margin-bottom:18px}
+.midband p{font-size:14px;line-height:1.8;color:#c3d2bd;margin:0 0 16px;max-width:460px}
+.midband .actions{margin-top:0}
+.midband .btn:not(.primary){border-color:#dce8d14d}
+.midband .primary{background:var(--accent);color:#163126}
+.play-links{display:flex;flex-wrap:wrap;gap:8px}
+.play-links a{padding:8px 15px;border:1px solid #6f886588;border-radius:20px;font-size:12.5px;transition:background .25s,color .25s}
+.play-links a:hover{background:#d9edab;color:#163126}
+#ai{background:#e9eddf}#hood{background:var(--paper)}#contact{background:#e9eddf}
+nav{gap:26px}
+nav .theme-orb{position:static;width:36px;height:36px;flex:none;animation:none;box-shadow:none;background:none;color:inherit;border:1px solid #b9c6ad;font-size:15px}
+[data-theme="dark"] nav .theme-orb{border-color:#ffffff33}
+[data-theme="dark"] #ai,[data-theme="dark"] #contact{background:#11261e}[data-theme="dark"] #hood{background:var(--paper)}
+@media(max-width:760px){.midband{padding:52px 0}.midband .wrap{grid-template-columns:1fr;gap:40px}#about .stats{margin-top:40px}nav{gap:12px}nav .theme-orb{width:32px;height:32px}.hero-facts{margin-top:16px}.hero-facts li{font-size:11px;padding:5px 10px}}
+/* Focus rings use the site green instead of the old purple. */
+a:focus-visible,button:focus-visible,summary:focus-visible{outline-color:#2fa96b}
+.hero a:focus-visible,.hero button:focus-visible,.midband a:focus-visible,.dark a:focus-visible,.dark summary:focus-visible{outline-color:#aef7cf}
+
+/* Sample bug reports start collapsed behind one button. */
+.bugrep-head{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.bugrep-head .subnote{margin-bottom:0}
+.bugrep-toggle{flex:none;background:#d9edab;color:#163126;border:0;padding:12px 22px;font-weight:600}
+.bugrep-toggle .bt-arrow{display:inline-block;transition:rotate .3s}
+.bugrep-toggle[aria-expanded="true"] .bt-arrow{rotate:180deg}
+.bugrep-grid{margin-top:28px}
+.bugrep-grid[hidden]{display:none}
+.bugrep-grid:not([hidden]) .bugrep{animation:bugrepIn .5s ease both}
+.bugrep-grid .bugrep:nth-child(2){animation-delay:.08s}.bugrep-grid .bugrep:nth-child(3){animation-delay:.16s}
+@keyframes bugrepIn{from{opacity:0;translate:0 16px}}
+@media(prefers-reduced-motion:reduce){.bugrep-grid .bugrep{animation:none!important}.bugrep-toggle .bt-arrow{transition:none}}
+
+/* Recruiter pass: availability line, measured results on cards. */
+.availability{display:inline-block;margin:0 0 14px;padding:7px 14px;border-radius:20px;background:#d9edab;color:#163126;font-weight:600;font-size:13.5px}
+.availability[hidden]{display:none}
+.proj-result{margin:0 0 14px!important;padding:8px 12px;border-left:3px solid #2fa96b;background:#2fa96b14;color:#1f4a35!important;font-weight:600}
+.proj.feat .proj-result{color:#d9edab!important;background:#ffffff0d}
+[data-theme="dark"] .proj-result{color:#c7e6a6!important}
+
+/* ===== Design pass: nav menu, hero, type floor, contrast, rhythm, dock, services art, stats, timeline, lab ===== */
+
+/* 1 · Compact menu under 900px. Desktop keeps the inline links (the wrapper is layout-transparent). */
+.navlinks{display:contents}
+.nav-toggle{display:none}
+@media(max-width:900px){
+ nav{gap:14px}
+ nav .btn{white-space:nowrap}
+ nav .navlinks{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:100%;z-index:8;padding:6px 6% 16px;background:#f5f5ed;border-bottom:1px solid #263c3022;box-shadow:0 22px 34px #1c352a24;visibility:hidden;opacity:0;translate:0 -8px;transition:opacity .25s,translate .25s,visibility 0s .25s}
+ nav.open .navlinks{visibility:visible;opacity:1;translate:0 0;transition:opacity .25s,translate .25s}
+ nav .navlinks a,nav .navlinks a.mid{display:block;padding:15px 2px;font-size:16px;border-bottom:1px solid #263c3014}
+ nav .navlinks a:last-child{border-bottom:0}
+ .nav-toggle{display:grid;place-items:center;flex:none;width:40px;height:40px;padding:0;border-radius:50%;border:1px solid #b9c6ad;background:none;color:inherit}
+ .nt-bars{display:grid;gap:4px;width:16px}
+ .nt-bars i{display:block;height:2px;border-radius:2px;background:currentColor;transition:translate .25s,rotate .25s,opacity .2s}
+ nav.open .nt-bars i:nth-child(1){translate:0 6px;rotate:45deg}
+ nav.open .nt-bars i:nth-child(2){opacity:0}
+ nav.open .nt-bars i:nth-child(3){translate:0 -6px;rotate:-45deg}
+ [data-theme="dark"] nav .navlinks{background:#0d1d17;border-bottom-color:#ffffff14;box-shadow:0 22px 34px #0008}
+ [data-theme="dark"] nav .navlinks a{border-bottom-color:#ffffff14}
+ [data-theme="dark"] .nav-toggle{border-color:#ffffff33}
+}
+@media(max-width:760px){
+ nav{width:calc(100% - 32px);gap:10px}
+ nav .btn{font-size:12px;padding:10px 14px}
+ .nav-toggle{width:36px;height:36px}
+}
+@media(max-width:430px){
+ .mark{width:28px;height:24px}
+ #brandfly{width:122px!important;height:27px!important}
+ nav strong{gap:6px}
+}
+@media(prefers-reduced-motion:reduce){nav .navlinks,nav.open .navlinks,.nt-bars i{transition:none}}
+
+/* 4 · Phone hero: smaller specimen up top, headline and both CTAs inside the first screen. */
+@media(max-width:760px){
+ .hero{padding-top:196px}
+ .bloom{top:104px;width:min(46vw,190px);right:5%}
+ .hero h1{font-size:clamp(40px,11.6vw,50px);line-height:1.03}
+ .hero .wrap{padding-bottom:84px}
+ .hero p{margin-top:14px;margin-bottom:0}
+ .hero-facts{margin-top:14px}
+ .hero .actions{margin-top:20px}
+}
+
+/* 5 · One heading voice: the italic line in the dark band uses the night-grove sage. */
+.dark h2 em{color:#9fca8f}
+
+/* 6 · Type floor: supporting text at least 12px, uppercase eyebrows at least 11px. */
+.label,.proj small.kind,.story-kind,.stat small,.score small,.quest-panel .qsub,.cel-card small,.sev,.bugrep dt,.arc-chip,.turns th,.ai-table th,.phases li,.scene-number,.qbadge{font-size:11px}
+.spec{font-size:11px}
+.barea,.score span,.proj .tags span,.tags span,.calc-bar,.sound-panel button,.hero-facts li{font-size:12px}
+@media(max-width:760px){.hero .label{font-size:11px}.hero .btn,.expertise-strip a,.hero-facts li{font-size:12px}.scene-number{font-size:11px}}
+
+/* 7 · Contrast to WCAG AA on the light grove, and the enquiry button back on palette. */
+.journey-heading>p,.phase small{color:#4d5b50}
+.proj small.kind{color:#4a6440}
+.subnote,.ai-intro{color:#535f56}
+.stat small{color:#56634f}
+.score span{color:#56634f}
+.logline .ln{color:#86a493}
+form button{background:#223e33;color:#fff}
+[data-theme="dark"] form button{background:#d9edab;color:#12261d}
+
+/* 8 · Section rhythm: paper and sage alternate in both themes; the dark band reads as an inset at night. */
+#services{background:#e9eddf}#contact{background:var(--paper)}
+.midband{background:#1d4134;border-top:1px solid #ffffff14}
+[data-theme="dark"] #about,[data-theme="dark"] #milestones,[data-theme="dark"] #lab,[data-theme="dark"] #hood,[data-theme="dark"] #contact{background:#0d1d17}
+[data-theme="dark"] .expertise-strip,[data-theme="dark"] #projects,[data-theme="dark"] #journey,[data-theme="dark"] #ai,[data-theme="dark"] #services{background:#132b22}
+[data-theme="dark"] .dark{background:#08140f}
+[data-theme="dark"] .midband{background:#18372b}
+[data-theme="dark"] .proj:not(.feat),[data-theme="dark"] .panel,[data-theme="dark"] form,[data-theme="dark"] .arc,[data-theme="dark"] .ai-panel,[data-theme="dark"] .ai-mode{background:#17322a}
+[data-theme="dark"] .ai-tab[aria-selected="true"]{background:#17322a;border-bottom-color:#17322a}
+[data-theme="dark"] .proj.feat{background:#0f241c;border-color:#2c4a3c}
+[data-theme="dark"] .card:hover{background:#1a3a2e}
+
+/* 9 · Less edge clutter: no scroll guide on small screens or while the games panel is open; the dock stays clear of content. */
+@media(max-width:900px){.guide{display:none!important}}
+.quest:has(.quest-panel:not([hidden]))~.guide{display:none}
+.spec{right:122px}
+footer{padding-bottom:92px}
+@media(max-width:760px){
+ #questOrb{width:46px;height:46px}
+ .qicon{width:28px;height:13px}
+ .alldone .qicon{width:32px;height:27px}
+ #soundToggle{width:40px;height:40px}
+ .snote{font-size:17px}
+ .quest-panel,.quest-tip{bottom:62px}
+ footer{padding-bottom:84px}
+}
+
+/* 10 · The games panel never reaches the header: its height stops below the nav. */
+.quest-panel{max-height:calc(100vh - 198px);max-height:calc(100dvh - 198px)}
+@media(max-width:760px){.quest-panel{max-height:calc(100vh - 168px);max-height:calc(100dvh - 168px)}}
+
+/* 11 · Offscreen sections (marked .idle by extras.js) pause their CSS loops; the featured console keeps running. */
+.idle :not(.console,.console *),.idle :not(.console,.console *)::before,.idle :not(.console,.console *)::after{animation-play-state:paused!important}
+
+/* 12 · Services: line-art icons in the project-card style, a small lift on hover. */
+.svc-ico{display:block;width:46px;height:46px;margin-bottom:22px;color:#294936;transition:translate .35s cubic-bezier(.3,.7,.3,1.2),color .35s}
+.svc-ico svg{display:block;width:100%;height:100%;overflow:visible}
+.svc-ico .acc{fill:#2fa96b;stroke:none}
+.svc-ico .acc-s{stroke:#2fa96b}
+.card:hover .svc-ico{translate:0 -4px;color:#1d5c3c}
+[data-theme="dark"] .svc-ico{color:#c7e6a6}
+[data-theme="dark"] .svc-ico .acc{fill:#4fe39a}[data-theme="dark"] .svc-ico .acc-s{stroke:#4fe39a}
+[data-theme="dark"] .card:hover .svc-ico{color:#e3ecda}
+@media(max-width:760px){.svc-ico{width:40px;height:40px;margin-bottom:14px}}
+@media(prefers-reduced-motion:reduce){.svc-ico{transition:none}.card:hover .svc-ico{translate:none}}
+
+/* 13 · Stats as hairline rows: About counts in serif; the scorecard reads as instrument measurements. */
+#about .stats{border:0;border-top:1px solid #213d3440;border-bottom:1px solid #213d3440;border-radius:0;background:none}
+#about .stat{text-align:left;padding:28px 24px 26px;border:0;border-left:1px solid #cad3c2}
+#about .stat:first-child{border-left:0;padding-left:0}
+#about .stat b{font-size:clamp(42px,4.2vw,62px);letter-spacing:-.02em}
+#about .stat small{display:block;margin-top:12px;line-height:1.5}
+#hood .scores{border:0;border-radius:0;border-bottom:1px solid #213d3440;padding-top:10px;background:repeating-linear-gradient(90deg,#213d3466 0 1px,transparent 1px 12px) top left/100% 7px no-repeat,linear-gradient(#213d3466,#213d3466) top left/100% 1px no-repeat}
+#hood .score{text-align:left;padding:22px 18px 22px;border:0;border-left:1px solid #cad3c2}
+#hood .score:first-child{border-left:0;padding-left:0}
+#hood .score b{font:500 clamp(22px,2.1vw,30px)/1.1 Consolas,"Courier New",monospace;letter-spacing:-.03em}
+#hood .score small{margin-top:10px}
+@media(max-width:900px){
+ #about .stat{border-left:0;padding-left:0}
+ #about .stat:nth-child(even){border-left:1px solid #cad3c2;padding-left:24px}
+ #about .stat:nth-child(-n+2){border-bottom:1px solid #cad3c2}
+ #hood .score{border-left:1px solid #cad3c2;padding-left:18px}
+ #hood .score:nth-child(3n+1){border-left:0;padding-left:0}
+ #hood .score:nth-child(-n+3){border-bottom:1px solid #cad3c2}
+}
+@media(max-width:760px){
+ #hood .score{border-left:0;padding-left:0;border-bottom:1px solid #cad3c2}
+ #hood .score:nth-child(even){border-left:1px solid #cad3c2;padding-left:16px}
+ #hood .score:nth-last-child(-n+2){border-bottom:0}
+}
+[data-theme="dark"] #about .stats{background:none;border-color:#ffffff2a}
+[data-theme="dark"] #about .stat,[data-theme="dark"] #hood .score{border-color:#ffffff1f}
+[data-theme="dark"] #hood .scores{background:repeating-linear-gradient(90deg,#c7e6a655 0 1px,transparent 1px 12px) top left/100% 7px no-repeat,linear-gradient(#c7e6a655,#c7e6a655) top left/100% 1px no-repeat;border-color:#ffffff2a}
+
+/* 14 · Career on desktop: the heading holds its place on the left while the vine grows on the right. */
+@media(min-width:1001px){
+ #milestones .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto auto 1fr;column-gap:6%;align-items:start}
+ #milestones .wrap>.label{grid-column:1;grid-row:1;position:sticky;top:118px}
+ #milestones .wrap>h2{grid-column:1;grid-row:2;position:sticky;top:146px}
+ #milestones .timeline{grid-column:2;grid-row:1/span 3;margin-top:4px}
+}
+
+/* 15 · Lab: fields styled like the rest of the grove; "Pause animation" is a proper pill. */
+#lab .panel input,#lab .panel select{height:48px;padding:0 16px;border:1px solid #c3cfb8;border-radius:12px;background-color:#fffef7;color:#213d34;font:15px "Segoe UI",sans-serif;transition:border-color .2s,box-shadow .2s}
+#lab .panel select{appearance:none;padding-right:44px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23294936' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;background-size:12px 8px;cursor:pointer}
+#lab .panel input:focus-visible,#lab .panel select:focus-visible{outline:none;border-color:#2fa96b;box-shadow:0 0 0 4px #2fa96b33}
+#lab .panel input:hover,#lab .panel select:hover{border-color:#8fb08a}
+[data-theme="dark"] #lab .panel input,[data-theme="dark"] #lab .panel select{background-color:#0d1d17;color:var(--ink);border-color:#ffffff2e}
+[data-theme="dark"] #lab .panel select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23c7e6a6' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+[data-theme="dark"] #lab .panel input:focus-visible,[data-theme="dark"] #lab .panel select:focus-visible{border-color:#4fe39a;box-shadow:0 0 0 4px #4fe39a2e}
+#pauseJourney{margin-left:10px;padding:10px 16px;border:1px solid #b9c6ad;border-radius:30px;font-size:12px;font-weight:500;background:none;color:inherit}
+#pauseJourney:hover{background:#e9eddf}
+[data-theme="dark"] #pauseJourney{border-color:#ffffff33}
+[data-theme="dark"] #pauseJourney:hover{background:#1a3a2e}
+@media(prefers-reduced-motion:reduce){#lab .panel input,#lab .panel select{transition:none}}
+.expertise-strip span:nth-child(2){font-size:11px}.expertise-strip a{font-size:12px}.phase>span{font-size:12px}
+.journey-copy>p{color:#4d5b50}
+
+/* Agent 3 fix: About paragraphs had no gap between them. */
+#aboutCopy p+p{margin-top:14px}
+
+/* Wing reveal (wingreveal.js, switch: effects.wingReveal). Two 3D wing panels in the colour of the section above,
+   hinged at the screen edges; the section shows through the butterfly-shaped hole between them. */
+.wr-on .wr-host{position:relative;overflow-x:clip;perspective:1300px;perspective-origin:50% 0}
+.wr-panel{position:absolute;left:0;top:0;width:100%;z-index:6;pointer-events:none;background:var(--wr-prev);will-change:transform,clip-path;backface-visibility:hidden}
+.wr-panel.l{transform-origin:0 0}.wr-panel.r{transform-origin:100% 0}
+.wr-panel::after{content:"";position:absolute;inset:0;opacity:var(--wr-shade,0)}
+.wr-panel.l::after{background:linear-gradient(90deg,transparent 15%,#00000059 50%)}
+.wr-panel.r::after{background:linear-gradient(270deg,transparent 15%,#00000059 50%)}
+.wr-panel svg{position:absolute;left:0;top:0;overflow:visible}
+.wr-panel .band{fill:none;stroke:#2fa96b;stroke-width:16;opacity:.22;stroke-linejoin:round}
+.wr-panel .line{fill:none;stroke:#8ff5c2;stroke-width:2;stroke-linejoin:round;filter:drop-shadow(0 0 6px #4fe39a)}
+.wr-panel .dot{fill:#4fe3c0}
+.wr-hinge{position:absolute;left:0;top:0;z-index:7;pointer-events:none;overflow:visible}
+.wr-hinge .body ellipse,.wr-hinge .body circle{fill:#141a0c}
+.wr-hinge .ant{fill:none;stroke:#141a0c;stroke-width:2;stroke-linecap:round}
+.wr-hinge .sheen{fill:#2fd98a;opacity:.45}
+[data-theme="dark"] .wr-hinge .body ellipse,[data-theme="dark"] .wr-hinge .body circle{fill:#0a120c}
+@media (prefers-reduced-motion:reduce){.wr-panel,.wr-hinge{display:none!important}}
+@media print{.wr-panel,.wr-hinge{display:none!important}}
+
+/* ===== Ported from the preview. Switches: effects.wingFlap3D (the .bfly rig exists only when on) and effects.scrollStory
+   (every story rule hangs off html.story, which is set only when on). The career heading, overflow and narrow-nav
+   fixes below apply regardless. ===== */
+/* ===== Swallowtail wingbeat in 3D — every butterfly() instance is a rig of layered SVGs (hind/fore per side + body).
+   Each wing layer turns on the body hinge (rotateY with perspective in container units, so small and large instances
+   look alike). Forewing leads, hindwing lags 5% of the cycle: the fold between them bends the wing surface. Slow
+   upstroke, a short clap above the body, a fast accelerating downstroke; the rig lifts on the downstroke; the wing
+   darkens as it turns edge-on and brightens as it opens toward the viewer. Duration per host comes from --flap. ===== */
+.bfly{position:relative;display:block;width:100%;height:100%;container-type:inline-size}
+.bf-rig{position:absolute;inset:0;display:block;animation:bfLift var(--flap,3.6s) infinite}
+.bfly .bf-layer{position:absolute;inset:0;display:block;width:100%;height:100%;overflow:visible;transform-origin:50% 51.7%;will-change:transform}
+.bfly .bf-layer.bf-l.bf-fore{animation:bfForeL var(--flap,3.6s) infinite}
+.bfly .bf-layer.bf-r.bf-fore{animation:bfForeR var(--flap,3.6s) infinite}
+.bfly .bf-layer.bf-l.bf-hind{animation:bfHindL var(--flap,3.6s) calc(var(--flap,3.6s) * -.95) infinite}
+.bfly .bf-layer.bf-r.bf-hind{animation:bfHindR var(--flap,3.6s) calc(var(--flap,3.6s) * -.95) infinite}
+.bfly .bf-layer.bf-body{will-change:auto}
+/* timing: keyframe easings carry the rhythm (ease-in-out up, hold, ease-in down, settle) */
+@keyframes bfForeL{
+ 0%{transform:perspective(170cqw) rotateY(-14deg) rotateX(0deg) skewY(0deg);filter:brightness(.94);animation-timing-function:cubic-bezier(.42,0,.58,1)}
+ 28%{transform:perspective(170cqw) rotateY(36deg) rotateX(-8deg) skewY(4deg);filter:brightness(.98);animation-timing-function:cubic-bezier(.42,0,.58,1)}
+ 54%{transform:perspective(170cqw) rotateY(82deg) rotateX(0deg) skewY(0deg);filter:brightness(.62);animation-timing-function:linear}
+ 56.5%{transform:perspective(170cqw) rotateY(82deg) rotateX(0deg) skewY(0deg);filter:brightness(.62);animation-timing-function:cubic-bezier(.6,0,.9,.55)}
+ 66%{transform:perspective(170cqw) rotateY(34deg) rotateX(10deg) skewY(-5deg);filter:brightness(.95);animation-timing-function:cubic-bezier(.3,.6,.6,1)}
+ 76%{transform:perspective(170cqw) rotateY(-20deg) rotateX(3deg) skewY(-1deg);filter:brightness(1.06);animation-timing-function:cubic-bezier(.3,0,.5,1)}
+ 100%{transform:perspective(170cqw) rotateY(-14deg) rotateX(0deg) skewY(0deg);filter:brightness(.94)}}
+@keyframes bfForeR{
+ 0%{transform:perspective(170cqw) rotateY(14deg) rotateX(0deg) skewY(0deg);filter:brightness(.94);animation-timing-function:cubic-bezier(.42,0,.58,1)}
+ 28%{transform:perspective(170cqw) rotateY(-36deg) rotateX(-8deg) skewY(-4deg);filter:brightness(.98);animation-timing-function:cubic-bezier(.42,0,.58,1)}
+ 54%{transform:perspective(170cqw) rotateY(-82deg) rotateX(0deg) skewY(0deg);filter:brightness(.62);animation-timing-function:linear}
+ 56.5%{transform:perspective(170cqw) rotateY(-82deg) rotateX(0deg) skewY(0deg);filter:brightness(.62);animation-timing-function:cubic-bezier(.6,0,.9,.55)}
+ 66%{transform:perspective(170cqw) rotateY(-34deg) rotateX(10deg) skewY(5deg);filter:brightness(.95);animation-timing-function:cubic-bezier(.3,.6,.6,1)}
+ 76%{transform:perspective(170cqw) rotateY(20deg) rotateX(3deg) skewY(1deg);filter:brightness(1.06);animation-timing-function:cubic-bezier(.3,0,.5,1)}
+ 100%{transform:perspective(170cqw) rotateY(14deg) rotateX(0deg) skewY(0deg);filter:brightness(.94)}}
+@keyframes bfHindL{
+ 0%{transform:perspective(170cqw) rotateY(-10deg) rotateX(0deg);filter:brightness(.92);animation-timing-function:cubic-bezier(.42,0,.58,1)}
+ 28%{transform:perspective(170cqw) rotateY(30deg) rotateX(5deg);filter:brightness(.96);animation-timing-function:cubic-bezier(.42,0,.58,1)}
+ 54%{transform:perspective(170cqw) rotateY(76deg) rotateX(0deg);filter:brightness(.6);animation-timing-function:linear}
+ 56.5%{transform:perspective(170cqw) rotateY(76deg) rotateX(0deg);filter:brightness(.6);animation-timing-function:cubic-bezier(.6,0,.9,.55)}
+ 66%{transform:perspective(170cqw) rotateY(30deg) rotateX(-7deg);filter:brightness(.93);animation-timing-function:cubic-bezier(.3,.6,.6,1)}
+ 76%{transform:perspective(170cqw) rotateY(-16deg) rotateX(-2deg);filter:brightness(1.04);animation-timing-function:cubic-bezier(.3,0,.5,1)}
+ 100%{transform:perspective(170cqw) rotateY(-10deg) rotateX(0deg);filter:brightness(.92)}}
+@keyframes bfHindR{
+ 0%{transform:perspective(170cqw) rotateY(10deg) rotateX(0deg);filter:brightness(.92);animation-timing-function:cubic-bezier(.42,0,.58,1)}
+ 28%{transform:perspective(170cqw) rotateY(-30deg) rotateX(5deg);filter:brightness(.96);animation-timing-function:cubic-bezier(.42,0,.58,1)}
+ 54%{transform:perspective(170cqw) rotateY(-76deg) rotateX(0deg);filter:brightness(.6);animation-timing-function:linear}
+ 56.5%{transform:perspective(170cqw) rotateY(-76deg) rotateX(0deg);filter:brightness(.6);animation-timing-function:cubic-bezier(.6,0,.9,.55)}
+ 66%{transform:perspective(170cqw) rotateY(-30deg) rotateX(-7deg);filter:brightness(.93);animation-timing-function:cubic-bezier(.3,.6,.6,1)}
+ 76%{transform:perspective(170cqw) rotateY(16deg) rotateX(-2deg);filter:brightness(1.04);animation-timing-function:cubic-bezier(.3,0,.5,1)}
+ 100%{transform:perspective(170cqw) rotateY(10deg) rotateX(0deg);filter:brightness(.92)}}
+/* the whole butterfly rises on the downstroke and settles on the upstroke */
+@keyframes bfLift{
+ 0%{translate:0 0;animation-timing-function:ease-in-out}
+ 56.5%{translate:0 1.2%;animation-timing-function:cubic-bezier(.6,0,.9,.55)}
+ 76%{translate:0 -2.6%;animation-timing-function:ease-out}
+ 100%{translate:0 0}}
+/* per-instance speed: hero slow and majestic (default 3.6s), drifters and guide fast, logo gentle */
+#introShape{--flap:2.6s}.emerged{--flap:2.2s}.guide{--flap:1.15s}.drift{--flap:.95s}.mark{--flap:3s}.perch{--flap:1.6s}.cel-fly{--flap:.9s}.ctafly{--flap:2.6s}
+.flycta:hover .ctafly,.flycta:focus-visible .ctafly{--flap:.42s}
+/* existing pause states still pause the rig (intro done, journey paused; .idle is covered by the offscreen rule) */
+.done .bf-layer,.done .bf-rig,.paused .bf-layer,.paused .bf-rig{animation-play-state:paused}
+.hidebug.caught .bfly{animation:bugPop .7s}
+@media(prefers-reduced-motion:reduce){.bfly .bf-layer,.bf-rig,.hidebug.caught .bfly{animation:none!important}}
+.hidebug.caught .bfly .bf-body{animation:none}
+
+/* ===== Scroll storytelling (html.story is set by main.js only when motion is allowed). No scroll-jacking: native
+   scrolling, smooth anchors, and layers that ease a little behind the scroll. ===== */
+
+/* B1 · the guide companion grows up as you read: caterpillar -> cocoon -> butterfly */
+.guide .g-stage{position:absolute;inset:0;display:block;opacity:0;transform-origin:50% 60%;will-change:opacity,scale}
+.guide .g-fly{opacity:1}
+.guide .g-stage svg{width:100%;height:100%;overflow:visible}
+.guide .g-larva svg{filter:drop-shadow(1px 4px 2px #001a1540)}
+.coc-sway{transform-box:view-box;transform-origin:60px 8px;animation:cocSway 3.4s ease-in-out infinite alternate}
+@keyframes cocSway{from{rotate:-5deg}to{rotate:5deg}}
+html:not(.story) .guide .g-larva,html:not(.story) .guide .g-cocoon{display:none}
+
+/* B4 · colour flow: light sections let two fixed tone layers show through; the dark bands get soft gradient edges */
+.tone{position:fixed;inset:0;z-index:-1;pointer-events:none;display:none}
+html.story .tone{display:block}
+html.story main>section:not(.hero):not(.dark),html.story main>.expertise-strip{background:transparent!important;border-bottom-color:transparent!important}
+#work{--band:#18372b}.midband{--band:#1d4134}footer{--band:#17352d}
+[data-theme="dark"] #work{--band:#08140f}[data-theme="dark"] .midband{--band:#18372b}
+html.story #work,html.story .midband,html.story footer{position:relative}
+html.story #work:before,html.story footer:before{content:"";position:absolute;left:0;right:0;bottom:100%;height:90px;background:linear-gradient(to bottom,transparent,var(--band));pointer-events:none}
+html.story .midband:after{content:"";position:absolute;left:0;right:0;top:100%;height:90px;background:linear-gradient(to top,transparent,var(--band));pointer-events:none;z-index:1}
+
+/* B3a · the career vine is drawn by scroll position (main.js sets --vine), entries light up as it reaches them */
+html.story .timeline:before{transform:scaleY(var(--vine,0));transition:transform .35s cubic-bezier(.2,.7,.3,1)}
+html.story .node:before{filter:grayscale(.85) brightness(.95);opacity:.5;transition:filter .5s,opacity .5s,scale .5s cubic-bezier(.3,.7,.3,1.4)}
+html.story .node.lit:before{filter:none;opacity:1;scale:1.18}
+
+@keyframes plxFore{from{translate:0 16px}to{translate:0 -16px}}
+@keyframes plxLabel{from{translate:0 8px}to{translate:0 -8px}}
+@keyframes plxBack{from{translate:0 -20px}to{translate:0 20px}}
+@keyframes pinSlide{from{translate:0 0}to{translate:calc(-1 * var(--pinx,0px)) 0}}
+@media(prefers-reduced-motion:no-preference){
+ @supports(animation-timeline:view()){
+  /* B2 · depth: eyebrow, headline and media drift at slightly different rates (text stays put) */
+  html.story main>section:not(.hero) h2{animation:plxFore linear both;animation-timeline:view();animation-range:cover}
+  @media(min-width:761px){
+   html.story main>section:not(.hero) .label{animation:plxLabel linear both;animation-timeline:view();animation-range:cover}
+   html.story .habitat,html.story #lab .panel,html.story .proj.feat .console,html.story #contact form{animation:plxBack linear both;animation-timeline:view();animation-range:cover}
+  }
+  @media(max-width:760px){@keyframes plxFore{from{translate:0 8px}to{translate:0 -8px}}}
+  /* B3b · projects: a short pinned horizontal slide on desktop; every card stays in DOM order for Tab and screen readers */
+  @media(min-width:1000px){
+   html.story #projects .pin{position:relative;height:calc(var(--stageh,0px) + var(--pinx,0px));view-timeline-name:--pin}
+   html.story #projects .pin-stage{position:sticky;top:var(--pt,110px);overflow-x:clip;padding:8px 0 26px;-webkit-mask-image:linear-gradient(90deg,#000 93%,transparent);mask-image:linear-gradient(90deg,#000 93%,transparent)}
+   html.story #projects .projgrid{display:flex;align-items:stretch;gap:18px;width:max-content;margin-top:0;padding-right:60px;position:relative;animation:pinSlide linear both;animation-timeline:--pin;animation-range:cover calc(100vh - var(--pt,110px)) cover calc(100vh - var(--pt,110px) + var(--pinx,0px))}
+   html.story #projects .projgrid .proj{flex:0 0 370px}
+  }
+  /* scroll-driven layers keep tracking the scroll even when the offscreen pause marks their section idle */
+  html.story .idle h2,html.story .idle .label,html.story .idle .habitat,html.story .idle .panel,html.story .idle .console,html.story .idle form,html.story .idle .projgrid{animation-play-state:running!important}
+ }
+}
+@media(prefers-reduced-motion:reduce){.coc-sway{animation:none}.tone{display:none!important}}
+/* career heading sticks as one block (eyebrow and headline leave together) */
+@media(min-width:1001px){#milestones .mile-head{grid-column:1;grid-row:1/span 3;align-self:start;position:sticky;top:118px}#milestones .mile-head>.label,#milestones .mile-head>h2{position:static}}
+/* nothing inside a section can widen the page (perching micro butterflies, 3D wing projection); clip keeps sticky working */
+main>section:not(.hero),main>.midband{overflow-x:clip}
+.pageprog{overflow-x:clip}
+@media(max-width:360px){nav .mark{display:none}#brandfly{width:104px!important;height:23px!important}nav{gap:8px}}
+
+/* Wing reveal x scroll story. With the colour flow on, the light sections are transparent over the fixed .tone layers, so
+   main.js paints the wing panels of those boundaries in the tone colour actually showing (inline --wr-prev). The soft
+   gradient above #work would end in a dark line right where its wing panels (in the light tone) start, so the wing reveal
+   takes over that boundary. */
+html.wr-on.story #work:before{display:none}
+/* Print: the scroll story steps aside (no fixed tone layers, no pinned slide, no parallax offsets). */
+@media print{.tone,.guide{display:none!important}
+ html.story #projects .pin{height:auto!important}
+ html.story #projects .pin-stage{position:static!important;overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important;padding:0!important}
+ html.story #projects .projgrid{display:grid!important;width:auto!important;padding-right:0!important;animation:none!important;translate:none!important}
+ html.story #projects .projgrid .proj{flex:none}
+ html.story main>section h2,html.story main>section .label,html.story .habitat,html.story #lab .panel,html.story .proj.feat .console,html.story #contact form{animation:none!important;translate:none!important}}
